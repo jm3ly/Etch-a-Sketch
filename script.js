@@ -1,49 +1,43 @@
-function createGrid (rows, cols) {
-    const container = document.getElementById('gridContainer')
-    const colorPalette = document.getElementById('color')
+const container = document.getElementById('container');
+const changeSizeBtn = document.getElementById('changeSizeBtn');
 
-    if (container && colorPalette) {
-        const basicColors = ['red', 'green', 'blue', 'yellow', 'purple', 'orange', 'black', 'white', 'grey']
-    };
+function createGrid(size) {
+  container.innerHTML = '';
+  container.style.gridTemplateColumns = `repeat(${size}, 20px)`;
+  container.style.gridTemplateRows = `repeat(${size}, 20px)`;
 
-    basicColors.forEach(color => {
-        const colorOption = document.createElement('div');
-        colorOption.classList.add(color-option);
-        colorOption.style.backgroundColor = color;
-    });
+  for (let i = 0; i < size * size; i++) {
+    const square = document.createElement('div');
+    square.classList.add('grid-square'); // Adding the class here
+    container.appendChild(square);
+  }
 
-    colorOption.addEventListener('click', function () {
-        selectedColor = color
-    })
-
-    colorPalette.appendChild(colorOption);
-
-    for (let i = 0; i < rows * cols; i++) {
-        const gridSquare = document.createElement('div');
-        gridSquare.classList.add('gridSquare');
-        container.appendChild(gridSquare);
-        gridSquare.addEventListener('mouseover', function() {
-            gridSquare.style.backgroundColor = 'red';
-        });
-        /*gridSquare.addEventListener('mouseout', function() {
-            gridSquare.style.backgroundColor = '';
-        });*/
-    };
-};
-
-document.addEventListener("DOMContentLoaded", function () {
-    createGrid(16, 16);
-});
-
-function getColor() {
-
+  addHoverEffect();
 }
 
-/*function getRandomColor() {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-};*/
+function addHoverEffect() {
+  const squares = document.querySelectorAll('.grid-square');
+
+  squares.forEach(square => {
+    square.addEventListener('mouseover', () => {
+      square.style.backgroundColor = 'blue';
+    });
+  });
+}
+
+function changeGridSize() {
+  const newSize = prompt('Enter the number of squares per side:');
+  const parsedSize = parseInt(newSize, 10);
+
+  if (!isNaN(parsedSize) && parsedSize > 0) {
+    createGrid(parsedSize);
+  } else {
+    alert('Please enter a valid number.');
+  }
+}
+
+// Initial grid creation
+createGrid(16);
+
+// Assigning the click event to the button
+changeSizeBtn.addEventListener('click', changeGridSize);
