@@ -1,5 +1,22 @@
 function createGrid (rows, cols) {
     const container = document.getElementById('gridContainer')
+    const colorPalette = document.getElementById('color')
+
+    if (container && colorPalette) {
+        const basicColors = ['red', 'green', 'blue', 'yellow', 'purple', 'orange', 'black', 'white', 'grey']
+    };
+
+    basicColors.forEach(color => {
+        const colorOption = document.createElement('div');
+        colorOption.classList.add(color-option);
+        colorOption.style.backgroundColor = color;
+    });
+
+    colorOption.addEventListener('click', function () {
+        selectedColor = color
+    })
+
+    colorPalette.appendChild(colorOption);
 
     for (let i = 0; i < rows * cols; i++) {
         const gridSquare = document.createElement('div');
