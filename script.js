@@ -2,8 +2,10 @@ const container = document.getElementById('container');
 const changeSizeBtn = document.getElementById('changeSizeBtn');
 const colorPicker = document.getElementById('colorPicker');
 const selectedColorDiv = document.getElementById('selectedColor');
+const toggleColorBtn = document.getElementById('toggleColorBtn'); // New button
 
 let currentColor = colorPicker.value;
+let isColorEnabled = true; // Flag to enable/disable color change
 
 function createGrid(size) {
     container.innerHTML = '';
@@ -24,7 +26,9 @@ function addHoverEffect() {
 
     squares.forEach(square => {
         square.addEventListener('mouseover', () => {
-            square.style.backgroundColor = currentColor;
+            if (isColorEnabled) {
+                square.style.backgroundColor = currentColor;
+            }
         });
     });
 }
@@ -43,11 +47,18 @@ function updateSelectedColor() {
     selectedColorDiv.style.backgroundColor = currentColor;
 }
 
+function toggleColor() {
+    isColorEnabled = !isColorEnabled;
+}
+
 // Initial grid creation
 createGrid(16);
 
-// Assigning the click event to the button
+// Assigning the click event to the "Change Grid Size" button
 changeSizeBtn.addEventListener('click', changeGridSize);
 
 // Assigning the input event to the color picker
 colorPicker.addEventListener('input', updateSelectedColor);
+
+// Assigning the click event to the "Toggle Color" button
+toggleColorBtn.addEventListener('click', toggleColor);
