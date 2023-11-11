@@ -1,46 +1,46 @@
 const container = document.getElementById('container');
 const changeSizeBtn = document.getElementById('changeSizeBtn');
+const colorPicker = document.getElementById('colorPicker');
+const selectedColorDiv = document.getElementById('selectedColor');
+
+let currentColor = colorPicker.value;
 
 function createGrid(size) {
-  container.innerHTML = '';
-  container.style.gridTemplateColumns = `repeat(${size}, 20px)`;
-  container.style.gridTemplateRows = `repeat(${size}, 20px)`;
-  const colorPicker = document.getElementById('colorPicker');
-  const selectedColorDiv = document.getElementById('selectedColor');
+    container.innerHTML = '';
+    container.style.gridTemplateColumns = `repeat(${size}, 20px)`;
+    container.style.gridTemplateRows = `repeat(${size}, 20px)`;
 
-  let currentColor = colorPicker.value;
+    for (let i = 0; i < size * size; i++) {
+        const square = document.createElement('div');
+        square.classList.add('grid-square');
+        container.appendChild(square);
+    }
 
-  for (let i = 0; i < size * size; i++) {
-    const square = document.createElement('div');
-    square.classList.add('grid-square'); // Adding the class here
-    container.appendChild(square);
-  }
-
-  addHoverEffect();
+    addHoverEffect();
 }
 
 function addHoverEffect() {
-  const squares = document.querySelectorAll('.grid-square');
+    const squares = document.querySelectorAll('.grid-square');
 
-  squares.forEach(square => {
-    square.addEventListener('mouseover', () => {
-      square.style.backgroundColor = 'blue';
+    squares.forEach(square => {
+        square.addEventListener('mouseover', () => {
+            square.style.backgroundColor = currentColor;
+        });
     });
-  });
 }
 
 function changeGridSize() {
-  const newSize = prompt('Enter the number of squares per side:');
-  const parsedSize = parseInt(newSize, 10);
+    const newSize = prompt('Enter the number of squares per side:');
+    const parsedSize = parseInt(newSize, 10);
 
-  if (!isNaN(parsedSize) && parsedSize > 0) {
-    createGrid(parsedSize);
-  };
-};
+    if (!isNaN(parsedSize) && parsedSize > 0) {
+        createGrid(parsedSize);
+    }
+}
 
 function updateSelectedColor() {
-  currentColor = colorPicker.value;
-  selectedColorDiv.style.backgroundColor = currentColor;
+    currentColor = colorPicker.value;
+    selectedColorDiv.style.backgroundColor = currentColor;
 }
 
 // Initial grid creation
