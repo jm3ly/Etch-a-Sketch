@@ -31,10 +31,8 @@ function changeGridSize() {
 
   if (!isNaN(parsedSize) && parsedSize > 0) {
     createGrid(parsedSize);
-  } else {
-    alert('Please enter a valid number.');
-  }
-}
+  };
+};
 
 // Initial grid creation
 createGrid(16);
