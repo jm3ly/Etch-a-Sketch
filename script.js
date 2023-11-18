@@ -3,6 +3,7 @@ const changeSizeBtn = document.getElementById('changeSizeBtn');
 const colorPicker = document.getElementById('colorPicker');
 const selectedColorDiv = document.getElementById('selectedColor');
 const toggleColorBtn = document.getElementById('toggleColorBtn'); // New button
+const deleteColorBtn = document.getElementById('deleteColorBtn')
 
 let currentColor = colorPicker.value;
 let isColorEnabled = true; // Flag to enable/disable color change
@@ -49,6 +50,11 @@ function updateSelectedColor() {
 
 function toggleColor() {
     isColorEnabled = !isColorEnabled;
+}
+
+function deleteColor () {
+    const deleteColor = deleteColorBtn 
+    
 }
 
 // Initial grid creation
