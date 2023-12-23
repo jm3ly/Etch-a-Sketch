@@ -52,10 +52,18 @@ function toggleColor() {
     isColorEnabled = !isColorEnabled;
 }
 
-function deleteColor () {
-    const deleteColor = deleteColorBtn 
-    
+function deleteColor() {
+    const squares = document.querySelectorAll('.grid-square');
+
+    squares.forEach(square => {
+        square.addEventListener('mouseover', () => {
+            if (isColorEnabled) {
+                square.style.backgroundColor = 'white';
+            }
+        });
+    });
 }
+
 
 // Initial grid creation
 createGrid(16);
@@ -68,3 +76,6 @@ colorPicker.addEventListener('input', updateSelectedColor);
 
 // Assigning the click event to the "Toggle Color" button
 toggleColorBtn.addEventListener('click', toggleColor);
+
+// Assigning the click event to the "Delete Color" button
+deleteColorBtn.addEventListener('click', deleteColor);
